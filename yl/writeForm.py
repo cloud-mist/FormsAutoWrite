@@ -5,7 +5,6 @@ from selenium.webdriver.chrome.service import Service
 from time import sleep
 from pathlib import Path
 
-import os
 
 # 个人信息
 name = "张三"
@@ -35,12 +34,11 @@ branchXpath2 = '//*[@id="react-select-3-option-29"]'
 commitXpath = '//*[@id="root"]/div/form/div[5]/div[1]/button'
 
 
-
 # 映射，减少代码量
 sign1 = {nameXpath: name, idXpath: idNum, phoneXpath: phone, majorPath: major}
 list1 = [localXpath1, localXpath2, branchXpath1, branchXpath2]
 
-# 读取url并删除文件
+# 从文件读取url
 with open(tmpFilePath, "r") as f:
     qrcodeUrl = f.read()
 
@@ -66,9 +64,10 @@ for i in list1:
     driver.find_element(By.XPATH, i).click()
 
 
-
 driver.get_screenshot_as_file(str(Path("./提交前信息.png")))
-#driver.find_element(By.XPATH, commitXpath).click()  # 提交按钮
+
+# driver.find_element(By.XPATH, commitXpath).click()  # 提交按钮
+
 sleep(2)
 print("Form write succeed!")
 driver.get_screenshot_as_file(str(Path("./提交后结果.png")))
